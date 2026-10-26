@@ -1,0 +1,6 @@
+PDFs can't be directly give to LLM, they are parsed
+Info to LLM, get Structured Output
+Deployed - Real World Working
+4 Layer Architecture
+
+Keep Multiple Sample Resume PDF, SD, JD (Take one live from LinkedIn) - Some Higher Score & some of Lower

@@ -1,0 +1,632 @@
+// ─── Design Tokens for Report Feature ─────────────────────────────────────────
+$color-bg:                  #0c0e15;
+$color-bg-card:             #131622;
+$color-bg-card-hover:       #161a29;
+$color-bg-input:            #171b28;
+$color-bg-input-focus:      #1a1f2e;
+
+$color-border:              rgba(255, 255, 255, 0.08);
+$color-border-subtle:       rgba(255, 255, 255, 0.05);
+$color-border-hover:        rgba(255, 255, 255, 0.16);
+
+$color-primary:             #ff2e63;
+$color-primary-light:       #ff4d6d;
+$color-primary-gradient:    linear-gradient(135deg, #ff2e63 0%, #ff0844 100%);
+$color-primary-glow:        rgba(255, 46, 99, 0.35);
+
+$color-badge-bg:            rgba(255, 51, 102, 0.12);
+$color-badge-border:        rgba(255, 51, 102, 0.28);
+$color-badge-text:          #ff4d6d;
+
+$color-info-bg:             rgba(30, 58, 138, 0.22);
+$color-info-border:         rgba(59, 130, 246, 0.3);
+$color-info-icon:           #3b82f6;
+$color-info-text:           #93c5fd;
+
+$color-text-main:           #ffffff;
+$color-text-secondary:      #cbd5e1;
+$color-text-muted:          #64748b;
+$color-text-placeholder:    #4e5668;
+
+$font-inter:                'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-montserrat:           'Montserrat', sans-serif;
+
+// ─── Animations ─────────────────────────────────────────────────────────────
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 46, 99, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 46, 99, 0.3);
+  }
+}
+
+@keyframes btnSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ─── Home Page Wrapper ──────────────────────────────────────────────────────
+.report-home-page {
+  min-height: 100vh;
+  width: 100%;
+  background-color: $color-bg;
+  background-image: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255, 46, 99, 0.12), transparent 70%),
+    radial-gradient(circle at 10% 40%, rgba(59, 130, 246, 0.05), transparent 40%),
+    radial-gradient(circle at 90% 70%, rgba(255, 46, 99, 0.04), transparent 50%);
+  color: $color-text-main;
+  font-family: $font-inter;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+// ─── Main Content Container ─────────────────────────────────────────────────
+.report-home-content {
+  flex: 1;
+  max-width: 1040px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// ─── Header Section ─────────────────────────────────────────────────────────
+.report-hero {
+  text-align: center;
+  max-width: 720px;
+  margin-bottom: 2.75rem;
+
+  &__title {
+    font-family: $font-montserrat;
+    font-size: 2.75rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    color: #ffffff;
+    margin-bottom: 0.9rem;
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+
+    .highlight-pink {
+      color: #ff3366;
+      background: linear-gradient(135deg, #ff4370 0%, #ff1e56 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.05rem;
+    color: #8b92a4;
+    line-height: 1.55;
+    font-weight: 400;
+
+    @media (max-width: 768px) {
+      font-size: 0.95rem;
+    }
+  }
+}
+
+// ─── Main Card ──────────────────────────────────────────────────────────────
+.report-main-card {
+  width: 100%;
+  background: $color-bg-card;
+  border: 1px solid $color-border;
+  border-radius: 1.25rem;
+  box-shadow: 
+    0 25px 60px -15px rgba(0, 0, 0, 0.7),
+    0 0 1px 1px rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+// ─── Card Body (Two Columns) ────────────────────────────────────────────────
+.report-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ─── Left Column: Target Job Description ────────────────────────────────────
+.job-desc-section {
+  padding: 1.75rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid $color-border;
+
+  @media (max-width: 860px) {
+    border-right: none;
+    border-bottom: 1px solid $color-border;
+    padding: 1.5rem;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+
+  &__title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-primary-light;
+  }
+
+  &__title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+  }
+
+  &__badge {
+    background: $color-badge-bg;
+    color: $color-badge-text;
+    border: 1px solid $color-badge-border;
+    padding: 0.2rem 0.55rem;
+    border-radius: 9999px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  &__input-container {
+    flex: 1;
+    min-height: 380px;
+    background: $color-bg-input;
+    border: 1px solid $color-border;
+    border-radius: 0.75rem;
+    padding: 1rem 1.15rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all 0.25s ease;
+
+    &:hover {
+      border-color: $color-border-hover;
+    }
+
+    &--focused {
+      border-color: rgba($color-primary-light, 0.45);
+      background: $color-bg-input-focus;
+      box-shadow: 0 0 0 2px rgba(255, 46, 99, 0.12);
+    }
+  }
+
+  &__textarea {
+    flex: 1;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    color: $color-text-main;
+    font-family: $font-inter;
+    font-size: 0.925rem;
+    line-height: 1.6;
+
+    &::placeholder {
+      color: $color-text-placeholder;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 4px;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+  }
+
+  &__char-count {
+    font-size: 0.75rem;
+    color: $color-text-muted;
+    font-weight: 500;
+  }
+}
+
+// ─── Right Column: Profile Section ──────────────────────────────────────────
+.profile-section {
+  padding: 1.75rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  @media (max-width: 860px) {
+    padding: 1.5rem;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 0.25rem;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-primary-light;
+  }
+
+  &__title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+  }
+
+  // Upload Resume Sub-header
+  &__sub-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__sub-title {
+    font-size: 0.925rem;
+    font-weight: 600;
+    color: #f1f5f9;
+  }
+
+  &__best-badge {
+    background: $color-badge-bg;
+    color: $color-badge-text;
+    border: 1px solid $color-badge-border;
+    padding: 0.2rem 0.55rem;
+    border-radius: 9999px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  // Dropzone Box
+  &__dropzone {
+    background: $color-bg-input;
+    border: 1px dashed rgba(255, 255, 255, 0.14);
+    border-radius: 0.75rem;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    position: relative;
+
+    &:hover {
+      border-color: rgba($color-primary-light, 0.5);
+      background: rgba(255, 46, 99, 0.03);
+    }
+
+    &--dragging {
+      border-color: $color-primary-light;
+      background: rgba(255, 46, 99, 0.08);
+      transform: scale(0.995);
+    }
+
+    &-cloud-icon {
+      color: $color-primary-light;
+      margin-bottom: 0.65rem;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover &-cloud-icon {
+      transform: translateY(-2px);
+    }
+
+    &-text {
+      font-size: 0.925rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 0.25rem;
+    }
+
+    &-hint {
+      font-size: 0.775rem;
+      color: $color-text-muted;
+    }
+
+    // Selected file state
+    &-selected {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 0.5rem;
+    }
+
+    &-file-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      overflow: hidden;
+    }
+
+    &-file-icon {
+      color: $color-primary-light;
+      display: flex;
+      align-items: center;
+    }
+
+    &-file-details {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      overflow: hidden;
+    }
+
+    &-file-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
+    }
+
+    &-file-size {
+      font-size: 0.725rem;
+      color: $color-text-muted;
+    }
+
+    &-remove-btn {
+      background: transparent;
+      border: none;
+      color: $color-text-muted;
+      cursor: pointer;
+      padding: 0.3rem;
+      border-radius: 0.35rem;
+      display: flex;
+      align-items: center;
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: #ff6b6b;
+        background: rgba(255, 107, 107, 0.1);
+      }
+    }
+  }
+
+  // "OR" Divider
+  &__divider {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    width: 100%;
+    margin: -0.25rem 0;
+
+    &-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    &-text {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #555d70;
+      letter-spacing: 0.08em;
+    }
+  }
+
+  // Quick Self-Description Box
+  &__self-desc-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__self-desc-container {
+    background: $color-bg-input;
+    border: 1px solid rgba(255, 77, 109, 0.35); // Matches glowing pink border in image
+    border-radius: 0.75rem;
+    padding: 0.85rem 1rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: rgba(255, 77, 109, 0.6);
+    }
+
+    &--focused {
+      border-color: $color-primary-light;
+      box-shadow: 0 0 0 2px rgba(255, 46, 99, 0.15);
+      background: $color-bg-input-focus;
+    }
+  }
+
+  &__self-desc-textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    color: $color-text-main;
+    font-family: $font-inter;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    min-height: 75px;
+
+    &::placeholder {
+      color: $color-text-placeholder;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+  }
+
+  // Blue Info Banner
+  &__info-banner {
+    background: $color-info-bg;
+    border: 1px solid $color-info-border;
+    border-radius: 0.65rem;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    &-icon {
+      color: $color-info-icon;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    &-text {
+      font-size: 0.825rem;
+      color: $color-info-text;
+      line-height: 1.45;
+
+      strong {
+        color: #ffffff;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// ─── Card Footer ────────────────────────────────────────────────────────────
+.report-card-footer {
+  border-top: 1px solid $color-border;
+  padding: 1.25rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(19, 22, 34, 0.75);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+    padding: 1.25rem 1.5rem;
+    text-align: center;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #7b8498;
+    font-size: 0.85rem;
+    font-weight: 400;
+
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
+  }
+
+  &__submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: $color-primary-gradient;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.55rem;
+    padding: 0.85rem 1.75rem;
+    font-family: $font-inter;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 24px $color-primary-glow;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: -0.01em;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(255, 46, 99, 0.5);
+      filter: brightness(1.08);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    &:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      filter: grayscale(0.2);
+      box-shadow: none;
+    }
+
+    .btn-star {
+      font-size: 1.05rem;
+      line-height: 1;
+    }
+
+    .btn-spinner {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #ffffff;
+      animation: btnSpin 0.8s linear infinite;
+    }
+  }
+}
+
+// ─── Footer Links ───────────────────────────────────────────────────────────
+.report-footer-links {
+  margin-top: 2.75rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.75rem;
+
+  &__link {
+    font-size: 0.8rem;
+    color: #64748b;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #cbd5e1;
+    }
+  }
+}

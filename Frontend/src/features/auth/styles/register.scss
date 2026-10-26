@@ -1,0 +1,483 @@
+@use "./login" as *;
+
+// ─── Register Page Layout ─────────────────────────────────────────────────────
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #131313;
+  color: #e5e2e1;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+// ─── Header (reuses login-header, overridden slightly) ───────────────────────
+.reg-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(#131313, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 50;
+  overflow: hidden;
+
+  &__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (min-width: 768px) {
+      padding: 0.75rem 2rem;
+    }
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+
+    &-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: #ffb4aa;
+      line-height: 1;
+    }
+
+    &-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #FF1E1E;
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__link {
+    color: #e9bcb6;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s;
+    display: none;
+
+    @media (min-width: 640px) {
+      display: inline;
+    }
+
+    &:hover {
+      color: #e5e2e1;
+    }
+  }
+
+  &__cta {
+    background-color: #FF1E1E;
+    color: #ffffff;
+    padding: 0.4rem 1.1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(#FF1E1E, 0.35);
+    transition: background-color 0.2s, transform 0.1s;
+    font-family: 'Inter', sans-serif;
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &:hover {
+      background-color: rgba(#FF1E1E, 0.9);
+    }
+  }
+}
+
+// ─── Main ────────────────────────────────────────────────────────────────────
+.register-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 5rem 1.25rem 2rem;
+  overflow: hidden;
+
+  @media (min-width: 768px) {
+    padding: 5.5rem 2rem 2rem;
+  }
+}
+
+// Background atmosphere
+.reg-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+
+  &__blob {
+    position: absolute;
+    border-radius: 50%;
+
+    &--red {
+      top: 10%;
+      left: 5%;
+      width: min(55vw, 350px);
+      height: min(55vw, 350px);
+      background-color: #FF1E1E;
+      opacity: 0.04;
+      filter: blur(90px);
+    }
+
+    &--pink {
+      bottom: 10%;
+      right: 5%;
+      width: min(50vw, 320px);
+      height: min(50vw, 320px);
+      background-color: #ffb4aa;
+      opacity: 0.04;
+      filter: blur(90px);
+    }
+  }
+}
+
+// ─── Container ───────────────────────────────────────────────────────────────
+.register-container {
+  width: 100%;
+  max-width: 23rem;
+  position: relative;
+  z-index: 10;
+}
+
+// ─── Hero Text ───────────────────────────────────────────────────────────────
+.register-hero {
+  text-align: center;
+  margin-bottom: 1rem;
+
+  &__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #e5e2e1;
+    margin-bottom: 0.35rem;
+    line-height: 1.2;
+  }
+
+  &__sub {
+    color: #e9bcb6;
+    opacity: 0.7;
+    font-size: 0.8125rem;
+  }
+}
+
+// ─── Glass Card ──────────────────────────────────────────────────────────────
+.register-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.7s ease forwards;
+
+  @media (min-width: 768px) {
+    padding: 1.75rem;
+  }
+
+  &__status {
+    position: absolute;
+    top: 0.875rem;
+    right: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  &__status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #4ade80;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  &__status-text {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #e9bcb6;
+    opacity: 0.6;
+  }
+}
+
+// ─── Form ────────────────────────────────────────────────────────────────────
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding-top: 0.375rem;
+}
+
+// ─── Field (shared with login style pattern) ──────────────────────────────────
+.reg-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+
+  &__label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #e9bcb6;
+    margin-left: 0.25rem;
+  }
+
+  &__input-wrap {
+    position: relative;
+
+    &:focus-within .reg-field__icon {
+      color: #FF1E1E;
+    }
+
+    &:focus-within .reg-field__input {
+      border-color: #FF1E1E;
+      box-shadow: 0 0 0 3px rgba(#FF1E1E, 0.15);
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    left: 0.875rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.125rem;
+    color: #b08782;
+    transition: color 0.2s;
+    pointer-events: none;
+    user-select: none;
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+  }
+
+  &__input {
+    width: 100%;
+    background-color: #0A0A0A;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    padding: 0.55rem 0.75rem 0.55rem 2.5rem;
+    color: #e5e2e1;
+    font-size: 0.8125rem;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &::placeholder {
+      color: rgba(#e9bcb6, 0.25);
+    }
+  }
+}
+
+// ─── Password Row ─────────────────────────────────────────────────────────────
+.reg-password-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+// ─── Terms Checkbox ───────────────────────────────────────────────────────────
+.reg-terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+
+  &__checkbox {
+    width: 15px;
+    height: 15px;
+    min-width: 15px;
+    margin-top: 1px;
+    border-radius: 0.25rem;
+    border: 1px solid #b08782;
+    background-color: #20201f;
+    accent-color: #FF1E1E;
+    cursor: pointer;
+  }
+
+  &__label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: #e9bcb6;
+    line-height: 1.5;
+
+    a {
+      color: #ffb4aa;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// ─── Submit Button ────────────────────────────────────────────────────────────
+.reg-btn {
+  width: 100%;
+  background-color: #FF1E1E;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.65rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(#FF1E1E, 0.25);
+  transition: background-color 0.2s, transform 0.1s;
+  letter-spacing: 0.01em;
+
+  &:hover {
+    background-color: rgba(#FF1E1E, 0.9);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// ─── Card Footer ─────────────────────────────────────────────────────────────
+.register-card__footer {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+
+  p {
+    font-size: 0.8125rem;
+    color: #e9bcb6;
+    opacity: 0.8;
+  }
+
+  a {
+    color: #ffb4aa;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+}
+
+// ─── Page Footer ─────────────────────────────────────────────────────────────
+.reg-footer {
+  width: 100%;
+  padding: 1.5rem 0;
+  background-color: #0e0e0e;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  z-index: 10;
+
+  &__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 0;
+      padding: 0 2.5rem;
+    }
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: #ffb4aa;
+    }
+
+    &-tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #e9bcb6;
+      opacity: 0.5;
+    }
+  }
+
+  &__links {
+    display: flex;
+    gap: 1.25rem;
+
+    a {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #e9bcb6;
+      opacity: 0.5;
+      text-decoration: none;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__copy {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: #e9bcb6;
+    opacity: 0.4;
+    text-align: center;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,273 @@
+// ─── Design Tokens for History Page ─────────────────────────────────────────
+$color-bg:                  #0c0e15;
+$color-bg-card:             #131622;
+$color-bg-card-hover:       #161a29;
+
+$color-border:              rgba(255, 255, 255, 0.08);
+
+$color-primary:             #ff2e63;
+$color-primary-light:       #ff4d6d;
+$color-primary-gradient:    linear-gradient(135deg, #ff2e63 0%, #ff0844 100%);
+$color-primary-glow:        rgba(255, 46, 99, 0.35);
+$color-badge-bg:            rgba(255, 51, 102, 0.12);
+$color-badge-border:        rgba(255, 51, 102, 0.28);
+
+$color-text-main:           #ffffff;
+$color-text-secondary:      #cbd5e1;
+$color-text-muted:          #64748b;
+
+$color-success:             #22c55e;
+$color-warning:             #facc15;
+$color-danger:              #ef4444;
+
+$font-inter:                'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-montserrat:           'Montserrat', sans-serif;
+
+@keyframes historySpin {
+  to { transform: rotate(360deg); }
+}
+
+// ─── Page Wrapper ───────────────────────────────────────────────────────────
+.history-page {
+  min-height: 100vh;
+  width: 100%;
+  background-color: $color-bg;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255, 46, 99, 0.12), transparent 70%),
+    radial-gradient(circle at 10% 40%, rgba(59, 130, 246, 0.05), transparent 40%),
+    radial-gradient(circle at 90% 70%, rgba(255, 46, 99, 0.04), transparent 50%);
+  color: $color-text-main;
+  font-family: $font-inter;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.history-content {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+// ─── Hero ───────────────────────────────────────────────────────────────────
+.history-hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+
+  &__title {
+    font-family: $font-montserrat;
+    font-weight: 800;
+    font-size: 2.5rem;
+    letter-spacing: -0.02em;
+
+    .highlight-pink {
+      color: $color-primary;
+    }
+  }
+
+  &__subtitle {
+    margin-top: 0.6rem;
+    color: $color-text-muted;
+    font-size: 1rem;
+  }
+}
+
+.history-count {
+  color: $color-text-muted;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+// ─── Grid & Cards ───────────────────────────────────────────────────────────
+.history-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+.history-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 1.4rem;
+  background: $color-bg-card;
+  border: 1px solid $color-border;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: $color-bg-card-hover;
+    border-color: $color-badge-border;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(255, 46, 99, 0.1);
+    outline: none;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 0;
+  }
+
+  &__title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: $color-text-main;
+    overflow-wrap: anywhere;
+  }
+
+  &__date {
+    font-size: 0.78rem;
+    color: $color-text-muted;
+  }
+
+  &__score {
+    flex-shrink: 0;
+    min-width: 58px;
+    padding: 0.45rem 0.7rem;
+    border-radius: 9999px;
+    border: 1px solid;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-align: center;
+
+    &--high {
+      color: $color-success;
+      background: rgba($color-success, 0.1);
+      border-color: rgba($color-success, 0.3);
+    }
+
+    &--mid {
+      color: $color-warning;
+      background: rgba($color-warning, 0.1);
+      border-color: rgba($color-warning, 0.3);
+    }
+
+    &--low {
+      color: $color-danger;
+      background: rgba($color-danger, 0.1);
+      border-color: rgba($color-danger, 0.3);
+    }
+  }
+
+  &__gaps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  &__gap {
+    padding: 0.25rem 0.65rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    color: $color-text-secondary;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border;
+
+    &--high {
+      border-color: rgba($color-danger, 0.3);
+      color: $color-danger;
+    }
+
+    &--med {
+      border-color: rgba($color-warning, 0.3);
+      color: $color-warning;
+    }
+
+    &--low {
+      border-color: rgba($color-success, 0.3);
+      color: $color-success;
+    }
+
+    &--more {
+      color: $color-text-muted;
+    }
+  }
+
+  &__no-gaps {
+    font-size: 0.8rem;
+    color: $color-text-muted;
+  }
+
+  &__cta {
+    margin-top: auto;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: $color-primary-light;
+  }
+}
+
+// ─── Loading / Empty / Error States ─────────────────────────────────────────
+.history-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 3.5rem 1.5rem;
+  background: $color-bg-card;
+  border: 1px solid $color-border;
+  border-radius: 1rem;
+  text-align: center;
+  color: $color-text-muted;
+
+  h3 {
+    color: $color-text-main;
+    font-size: 1.15rem;
+  }
+
+  &--error h3 {
+    color: $color-primary-light;
+  }
+}
+
+.history-spinner {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 46, 99, 0.3);
+  border-top-color: $color-primary;
+  animation: historySpin 0.8s linear infinite;
+}
+
+.history-btn {
+  margin-top: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 0.55rem;
+  background: $color-primary-gradient;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 16px $color-primary-glow;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+@media (max-width: 560px) {
+  .history-hero__title {
+    font-size: 1.8rem;
+  }
+
+  .history-grid {
+    grid-template-columns: 1fr;
+  }
+}
