@@ -49,12 +49,19 @@ const registerUser = async (req, res) => {
       otp: otpHash,
     });
 
-    await sendEmail(
-      email,
-      "Email Verification OTP",
-      `Your OTP is: ${otp}`,
-      otpHTML,
-    );
+    try {
+      await sendEmail(
+        email,
+        "Email Verification OTP",
+        `Your OTP is: ${otp}`,
+        otpHTML,
+      );
+    } catch (emailError) {
+      // Roll back so the user can retry registration with the same email
+      await otpModel.deleteMany({ user: user._id });
+      await userModel.deleteOne({ _id: user._id });
+      return res.status(502).json({ message: "Could not send the verification email. Please try again." });
+    }
 
     res.status(201).json({
       message: "User registered successfully",
